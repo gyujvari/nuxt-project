@@ -1,8 +1,9 @@
 export const state = () => ({
     data: [],
     isLoggedIn: false,
-    unauthorized:false,
+    unAuthorized:false,
     isLoading:false,
+    errorMessage:''
   })
   
   export const getters = {
@@ -22,10 +23,13 @@ export const state = () => ({
         state.isLoggedIn = payload
     },
     setUnathorized(state, payload) {
-        state.unauthorized = payload
+        state.unAuthorized = payload
     },
     setLoading(state, payload) {
         state.isLoading = payload
+    },
+    setErrorMessage(state, payload) {
+        state.errorMessage = payload
     }
   }
   
@@ -44,10 +48,13 @@ export const state = () => ({
                 }
                 else{
                     commit('setLoading', false)
+                    commit('setErrorMessage', "Serverside error :(!")
+
                 }
         }).catch((err)=>{
             if( err.response.status == 401){
                 commit('setUnathorized', true)
+                commit('setErrorMessage', "Invalid user or password!")
             }
         })
     },
