@@ -1,19 +1,12 @@
-
 <template>
-    <div>
-         <div v-for="p in this.$store.state.data" :key="p.id">
-            {{ p.text }}
-          </div>
-            <tbody>
-                <tr v-for="item in this.$store.state.data" :key="item.id">
-                    <td>{{item.text}} {{item.id}}</td>
-                </tr>
-            </tbody>
+    <div class="container">
+        <b-card class="mt-3" header="Table">
+            <b-table striped hover :items="this.$store.state.data"></b-table>
+        </b-card>
     </div>
 </template>
 <script>
     export default{
         name: 'Table',
     }
-
 </script>
