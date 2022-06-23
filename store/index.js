@@ -1,6 +1,8 @@
 export const state = () => ({
     data: [],
-    isLoggedIn: false
+    isLoggedIn: false,
+    unauthorized:false,
+    isLoading:false,
   })
   
   export const getters = {
@@ -9,7 +11,7 @@ export const state = () => ({
     },
     getLoggedInState(state) {
         return state.isLoggedIn
-      }
+    }
   }
   
   export const mutations = {
@@ -18,6 +20,12 @@ export const state = () => ({
     },
     setLoggedIn(state, payload) {
         state.isLoggedIn = payload
+    },
+    setUnathorized(state, payload) {
+        state.unauthorized = payload
+    },
+    setLoading(state, payload) {
+        state.isLoading = payload
     }
   }
   
@@ -26,12 +34,20 @@ export const state = () => ({
         const user = payload.user
         const password =  payload.password
         await this.$axios.$post('https://otthoni-feladat-backend.herokuapp.com/login',{user: user, password:password}).then((res)=>{
-            console.log(res.token,'response')
+                commit('setLoading', true)
                 if (res.token !== ""){
                     commit('setLoggedIn',true)
+                    commit('setLoading', false)
                     this.$axios.$get('https://otthoni-feladat-backend.herokuapp.com/data',{headers : { 'x-api-key' : `${res.token}`}}).then((res)=>{
                     commit('setData',res)
-                })
+                    })
+                }
+                else{
+                    commit('setLoading', false)
+                }
+        }).catch((err)=>{
+            if( err.response.status == 401){
+                commit('setUnathorized', true)
             }
         })
     },

@@ -12,7 +12,6 @@
     export default{
         name: 'Login',
         data () {
-        
             return{
                  credentials:{
                     user:'',
@@ -22,7 +21,6 @@
         },
         methods: {
             Login() {
-                console.log('click')
                 this.$store.dispatch("fetchLogin", this.credentials)
             },
         }
