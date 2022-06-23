@@ -1,9 +1,11 @@
 
 <template>
     <div>
-         <input type="text" v-model="credentials.user" placeholder="email"/>
-         <input type="text" v-model="credentials.password" placeholder="email"/>
-         <button @click="Login">Login</button>
+          <b-card class="mt-3" header="Login">
+             <b-form-input  v-model="credentials.user" placeholder="username" required></b-form-input>
+             <b-form-input v-model="credentials.password" placeholder="password" type="password" required></b-form-input>
+              <b-button @click="Login"  variant="primary">Login</b-button>
+          </b-card>
     </div>
 </template>
 <script>
