@@ -2,14 +2,8 @@
   <div v-if="this.$store.state.isLoading">
       <Loading/>
   </div>
-
   <div v-else>
-      <div v-if="!this.$store.state.isLoggedIn">
-        <Login/>
-      </div>
-      <div v-else>
-        <Table/>
-      </div>
+      <Login/>
   </div>
   
  
@@ -22,6 +16,6 @@ import Loading from '../components/Loading.vue';
 
 export default {
     name: "IndexPage",
-    components: { Login ,Table, Loading }
+    components: { Login ,Table, Loading },
 }
 </script>

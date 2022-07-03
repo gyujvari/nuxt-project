@@ -40,10 +40,11 @@ export const state = () => ({
         await this.$axios.$post('https://otthoni-feladat-backend.herokuapp.com/login',{user: user, password:password}).then((res)=>{
                 commit('setLoading', true)
                 if (res.token !== ""){
-                    commit('setLoggedIn',true)
-                    commit('setLoading', false)
-                    this.$axios.$get('https://otthoni-feladat-backend.herokuapp.com/data',{headers : { 'x-api-key' : `${res.token}`}}).then((res)=>{
-                    commit('setData',res)
+                      commit('setLoggedIn',true)
+                      commit('setLoading', false)
+                      this.$axios.$get('https://otthoni-feladat-backend.herokuapp.com/data',{headers : { 'x-api-key' : `${res.token}`}}).then((res)=>{
+                      commit('setData',res)
+                      this.$router.push({name: 'data'});
                     })
                 }
                 else{

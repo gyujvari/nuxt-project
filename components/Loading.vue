@@ -19,6 +19,12 @@
         -webkit-animation: spin 2s linear infinite; /* Safari */
         animation: spin 2s linear infinite;
     }
+    .not-logged-in{
+        display: flex;
+        justify-content: center;
+        margin-top: 10%;
+        font-size: 50px;
+    }
     @keyframes spin {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
